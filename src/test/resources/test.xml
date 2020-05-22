@@ -1,0 +1,17 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite1" verbose="1" >
+    <test name="Some test" >
+        <parameter name="firstVal" value="2"/>
+        <parameter name="secondVal" value="1"/>
+        <parameter name="expectedVal" value="2"/>
+        <classes>
+            <class name="ru.volsu.qa.SimpleTests">
+               <methods>
+                   <include name="testWithParams"/>
+               </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>
