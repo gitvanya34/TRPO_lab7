@@ -19,7 +19,25 @@ private String token;
     public void beforeClass() {
         RestAssured.baseURI = "https://gorest.co.in";
        RestAssured.port = 443;
-        token="?access-token=oPa_kpfb6A0yhvGdL2p39q7vhgfoTYtWV9d2";
+        token="oPa_kpfb6A0yhvGdL2p39q7vhgfoTYtWV9d2";
+    }
+
+
+
+
+
+    @Test
+    public void testGetUsers() {
+
+        given()
+                .auth().oauth2(token)
+                .log().all()
+        .when()
+                .request("GET", "public-api/users")
+        .then()
+                .log().all()
+                .statusCode(200);
+        System.out.println("////////////////////////////////////////////");
     }
 
     @DataProvider(name = "testGetUsers_Data")
@@ -30,6 +48,22 @@ private String token;
                 {"Neva"},
                 {"Jonh"}};
     }
+
+    @Test(dataProvider = "testGetUsers_Data")
+    public void testGetUsersFirstName(String first_name) {
+
+        given()
+                .auth().oauth2(token)
+      //  .pathParam("&first_name", first_name)
+                .log().all()
+        .when()
+
+                .request("GET", "/public-api/users?access-token="+token+"&first_name"+first_name)
+        .then()
+                .log().all()
+                .statusCode(200);
+        System.out.println("////////////////////////////////////////////");
+    }
     @DataProvider(name = "testGetUsersUserId_Data")
     public Object[][] testGetUsersUserId_Data()
     {
@@ -38,59 +72,34 @@ private String token;
                 {"1452"},
                 {"1453"}};
     }
-    @DataProvider(name = "testPostUsers_Data")
-    public Object[][] testPostUsers_Data()
-    {
-        return  new Object[][]{
-            {"Salam", "Salam", "female", "1970-01-01", Math.random()+"@example.com", "+1 (903) 946-1126"},
-    //            {"Salam", "Salam", "female", "1970-01-01", "n1b8rr@example.com", "+1 (903) 946-1126"},
-    //            {"Salam", "Salam", "female", "1970-01-01", "n1b8rr@example.com", "+1 (903) 946-1126"}
-        };
-}
-
-    @Test
-    public void testGetUsers() {
-
-        given()
-                .log().all()
-        .when()
-                .request("GET", "public-api/users"+token)
-        .then()
-                .log().all()
-                .statusCode(200);
-        System.out.println("////////////////////////////////////////////");
-    }
-
-    @Test(dataProvider = "testGetUsers_Data")
-    public void testGetUsersFirstName(String first_name) {
-
-        given()
-                .log().all()
-        .when()
-                .request("GET", "/public-api/users"+token+"&first_name="+first_name)
-        .then()
-                .log().all()
-                .statusCode(200);
-        System.out.println("////////////////////////////////////////////");
-    }
     @Test(dataProvider = "testGetUsersUserId_Data")
     public void testGetUsersUserId(String id) {
 
         given()
+                .auth().oauth2(token)
                 .log().all()
         .when()
-                .request("GET", "/public-api/users/"+id+token)
+                .request("GET", "/public-api/users/"+id)
         .then()
                 .log().all()
                 .statusCode(200);
         System.out.println("////////////////////////////////////////////");
     }
 
+    @DataProvider(name = "testPostUsers_Data")
+    public Object[][] testPostUsers_Data()
+    {
+        return  new Object[][]{
+                {"Salam", "Salam", "female", "1970-01-01", Math.random()+"@example.com", "+1 (903) 946-1126"},
+                //            {"Salam", "Salam", "female", "1970-01-01", "n1b8rr@example.com", "+1 (903) 946-1126"},
+                //            {"Salam", "Salam", "female", "1970-01-01", "n1b8rr@example.com", "+1 (903) 946-1126"}
+        };
+    }
 
     @Test(dataProvider = "testPostUsers_Data")
     public void testPostUsers( String first_name, String last_name, String gender, String dob, String email, String phone) {
         Post newPost = new Post( first_name, last_name,gender, dob, email, phone);
-        given().auth().oauth2("oPa_kpfb6A0yhvGdL2p39q7vhgfoTYtWV9d2")
+        given().auth().oauth2(token)
                 .log().all()
                 .contentType(ContentType.JSON)
                 .body(newPost)
@@ -108,12 +117,18 @@ private String token;
                  .statusCode(302);
     }
 
-    @Test(dataProvider = "testPostUsers_Data")
-    public void testPutUsersUserId(String first_name, String last_name, String gender, String dob, String email, String phone ) {
-        Post newPost = new Post( first_name, last_name,gender, dob, email, phone);
-        int id =1451;
-        given().auth().oauth2("oPa_kpfb6A0yhvGdL2p39q7vhgfoTYtWV9d2")
+    @DataProvider(name = "testPutUsersUserId_Data")
+    public Object[][] testPutUsersUserId()
+    {
+        return  new Object[][]{
+                {1451,"Salam", "Salam", "female", "1970-01-01", Math.random()+"@example.com", "+1 (903) 946-1126"},
+        };
+    }
 
+    @Test(dataProvider = "testPutUsersUserId_Data")
+    public void testPutUsersUserId(int id,String first_name, String last_name, String gender, String dob, String email, String phone ) {
+        Post newPost = new Post( first_name, last_name,gender, dob, email, phone);
+        given().auth().oauth2(token)
                 .log().all()
                 .contentType(ContentType.JSON)
                 .body(newPost)
@@ -131,10 +146,18 @@ private String token;
                  .statusCode(200);
     }
 
-    @Test()
-    public void testDeleteUsersUserId() {
-        int id =1468;
-        given().auth().oauth2("oPa_kpfb6A0yhvGdL2p39q7vhgfoTYtWV9d2")
+
+    @DataProvider(name = "testDeleteUsersUserId_Data")
+    public Object[][] testDeleteUsersUserId_Data()
+    {
+        return  new Object[][]{
+         {1468},
+        };
+    }
+    @Test(dataProvider = "testDeleteUsersUserId_Data")
+    public void testDeleteUsersUserId(int id) {
+
+        given().auth().oauth2(token)
          .log().all()
          .contentType(ContentType.JSON)
 
@@ -146,5 +169,5 @@ private String token;
             .statusCode(200);
     }
 
-
+    ////негативные
 }
