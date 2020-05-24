@@ -3,6 +3,7 @@ package ru.volsu.qa;
 import java.lang.Math;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -28,7 +29,6 @@ private String token;
 
     @Test
     public void testGetUsers() {
-
         given()
                 .auth().oauth2(token)
                 .log().all()
@@ -57,7 +57,6 @@ private String token;
       //  .pathParam("&first_name", first_name)
                 .log().all()
         .when()
-
                 .request("GET", "/public-api/users?access-token="+token+"&first_name"+first_name)
         .then()
                 .log().all()
@@ -160,7 +159,6 @@ private String token;
         given().auth().oauth2(token)
          .log().all()
          .contentType(ContentType.JSON)
-
         .when()
                 .delete( "/public-api/users/"+id)
         .then()
@@ -170,4 +168,102 @@ private String token;
     }
 
     ////негативные
+    @DataProvider(name = "testGetUsersNegative_Data")
+    public Object[][] testGetUsersNegative_Data() {
+        return new Object[][]{
+                {""},
+                {"?access-token=123456789"},
+                {"?access-token=oPa_kpfb6A0yhvGdL2p39q7vhgfoTYtWV9d2"}
+        };
+    }
+
+    @Test(dataProvider = "testGetUsersNegative_Data")
+    public void testGetUsersNegative(String tokenNegative) {
+        try {
+            given()
+                    .log().all()
+                    .when()
+                    .request("GET", "public-api/users" + tokenNegative)
+                    .then()
+                    .log().all()
+                    .body("_meta.code", equalTo(401))
+                    .statusCode(200);
+            System.out.println("Текущее значение: 401");
+            System.out.println("Ожидаемое значение: 401");
+
+        }
+        catch(AssertionError e){
+
+            System.out.println("Ожидаемое значение: 401");
+            System.out.println("Текущее значение:"+ e);
+            Assert.assertFalse(true);
+
+        }
+    }
+    @DataProvider(name = "testPostUsersNegative_Data")
+    public Object[][] testPostUsersNegative_Data()
+    {
+        return  new Object[][]{
+                {"Salam", "Salam", "female", "1970-01-01", Math.random()+"@example.com", "+1 (903) 946-1126"},
+                {"Salam", "Salam", "female", "1970-01-01", "elta.wiza@example.org", "+1 (903) 946-1126"},
+//            {"Salam", "Salam", "female", "1970-01-01", "n1b8rr@example.com", "+1 (903) 946-1126"}
+        };
+    }
+
+    @Test(dataProvider = "testPostUsersNegative_Data")//регистрация на существующий email
+    public void testPostUsersNegative( String first_name, String last_name, String gender, String dob, String email, String phone) {
+        Post newPost = new Post( first_name, last_name,gender, dob, email, phone);
+        try {
+            given().auth().oauth2(token)
+                    .log().all()
+                    .contentType(ContentType.JSON)
+                    .body(newPost)
+                    .when()
+                    .post("/public-api/users")
+                    .then()
+                    .log().all()
+                    .body("_meta.code", equalTo(422))
+                    .statusCode(200);
+            System.out.println("Текущее значение: 422");
+            System.out.println("Ожидаемое значение: 422");
+            }
+        catch (AssertionError e)
+        {
+            System.out.println("Ожидаемое значение: 422");
+            System.out.println("Текущее значение:"+ e);
+            Assert.assertFalse(true);
+        }
+    }
+
+
+    @DataProvider(name = "testDeleteUsersUserIdNegative_Data")
+    public Object[][] testDeleteUsersUserIdNegative_Data()
+    {
+        return  new Object[][]{
+                {0000},
+                {1550},
+        };
+    }
+    @Test(dataProvider = "testDeleteUsersUserIdNegative_Data")
+    public void testDeleteUsersUserIdNegative(int id) {
+        try {
+            given().auth().oauth2(token)
+                    .log().all()
+                    .contentType(ContentType.JSON)
+                    .when()
+                    .delete("/public-api/users/" + id)
+                    .then()
+                    .log().all()
+                    .body("_meta.code", equalTo(404))
+                    .statusCode(200);
+            System.out.println("Ожидаемое значение: 404");
+            System.out.println("Текущее значение: 404");
+        }
+        catch (AssertionError e)
+        {
+            System.out.println("Ожидаемое значение: 404");
+            System.out.println("Текущее значение:"+ e);
+            Assert.assertFalse(true);
+        }
+    }
 }
