@@ -3,6 +3,10 @@ package ru.volsu.qa;
 import java.lang.Math;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
+import io.restassured.response.ResponseBody;
+import io.restassured.specification.ResponseSpecification;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
@@ -13,7 +17,7 @@ import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
 public class ApiTests {
-
+private  int id;
 private String token;
 //////Позитивные
     @BeforeClass
@@ -22,10 +26,6 @@ private String token;
        RestAssured.port = 443;
         token="oPa_kpfb6A0yhvGdL2p39q7vhgfoTYtWV9d2";
     }
-
-
-
-
 
     @Test
     public void testGetUsers() {
@@ -98,6 +98,7 @@ private String token;
     @Test(dataProvider = "testPostUsers_Data")
     public void testPostUsers( String first_name, String last_name, String gender, String dob, String email, String phone) {
         Post newPost = new Post( first_name, last_name,gender, dob, email, phone);
+        String id="1";
         given().auth().oauth2(token)
                 .log().all()
                 .contentType(ContentType.JSON)
@@ -113,6 +114,7 @@ private String token;
                 .body("result.dob", equalTo(newPost.getDob()))
                 .body("result.email", equalTo(newPost.getEmail()))
                 .body("result.phone", equalTo(newPost.getPhone()))
+
                  .statusCode(302);
     }
 
@@ -120,7 +122,7 @@ private String token;
     public Object[][] testPutUsersUserId()
     {
         return  new Object[][]{
-                {1451,"Salam", "Salam", "female", "1970-01-01", Math.random()+"@example.com", "+1 (903) 946-1126"},
+                {1582,"Salam", "Salam", "female", "1970-01-01", Math.random()+"@example.com", "+1 (903) 946-1126"},
         };
     }
 
@@ -149,8 +151,20 @@ private String token;
     @DataProvider(name = "testDeleteUsersUserId_Data")
     public Object[][] testDeleteUsersUserId_Data()
     {
+        Post newPost = new Post( "first_name", "last_name","female", "dob", Math.random()+"@example.com", "phone");
+        JsonPath response =
+            given().auth().oauth2(token)
+            .contentType(ContentType.JSON)
+            .body(newPost)
+            .when()
+            .post( "/public-api/users")
+            .then()
+            .extract()
+            .jsonPath();
+        int id=response.getInt("result.id");
+
         return  new Object[][]{
-         {1468},
+         {id}
         };
     }
     @Test(dataProvider = "testDeleteUsersUserId_Data")
@@ -173,13 +187,13 @@ private String token;
         return new Object[][]{
                 {""},
                 {"?access-token=123456789"},
-                {"?access-token=oPa_kpfb6A0yhvGdL2p39q7vhgfoTYtWV9d2"}
+              //  {"?access-token=oPa_kpfb6A0yhvGdL2p39q7vhgfoTYtWV9d2"}
         };
     }
 
     @Test(dataProvider = "testGetUsersNegative_Data")
     public void testGetUsersNegative(String tokenNegative) {
-        try {
+
             given()
                     .log().all()
                     .when()
@@ -191,21 +205,15 @@ private String token;
             System.out.println("Текущее значение: 401");
             System.out.println("Ожидаемое значение: 401");
 
-        }
-        catch(AssertionError e){
 
-            System.out.println("Ожидаемое значение: 401");
-            System.out.println("Текущее значение:"+ e);
-            Assert.assertFalse(true);
 
-        }
     }
     @DataProvider(name = "testPostUsersNegative_Data")
     public Object[][] testPostUsersNegative_Data()
     {
         return  new Object[][]{
-                {"Salam", "Salam", "female", "1970-01-01", Math.random()+"@example.com", "+1 (903) 946-1126"},
-                {"Salam", "Salam", "female", "1970-01-01", "elta.wiza@example.org", "+1 (903) 946-1126"},
+      //          {"Salam", "Salam", "female", "1970-01-01", Math.random()+"@example.com", "+1 (903) 946-1126"},
+               {"Salam", "Salam", "female", "1970-01-01", "elta.wiza@example.org", "+1 (903) 946-1126"},
 //            {"Salam", "Salam", "female", "1970-01-01", "n1b8rr@example.com", "+1 (903) 946-1126"}
         };
     }
@@ -213,7 +221,7 @@ private String token;
     @Test(dataProvider = "testPostUsersNegative_Data")//регистрация на существующий email
     public void testPostUsersNegative( String first_name, String last_name, String gender, String dob, String email, String phone) {
         Post newPost = new Post( first_name, last_name,gender, dob, email, phone);
-        try {
+
             given().auth().oauth2(token)
                     .log().all()
                     .contentType(ContentType.JSON)
@@ -226,13 +234,10 @@ private String token;
                     .statusCode(200);
             System.out.println("Текущее значение: 422");
             System.out.println("Ожидаемое значение: 422");
-            }
-        catch (AssertionError e)
-        {
-            System.out.println("Ожидаемое значение: 422");
-            System.out.println("Текущее значение:"+ e);
-            Assert.assertFalse(true);
-        }
+
+
+
+
     }
 
 
@@ -246,7 +251,7 @@ private String token;
     }
     @Test(dataProvider = "testDeleteUsersUserIdNegative_Data")
     public void testDeleteUsersUserIdNegative(int id) {
-        try {
+
             given().auth().oauth2(token)
                     .log().all()
                     .contentType(ContentType.JSON)
@@ -258,12 +263,7 @@ private String token;
                     .statusCode(200);
             System.out.println("Ожидаемое значение: 404");
             System.out.println("Текущее значение: 404");
-        }
-        catch (AssertionError e)
-        {
-            System.out.println("Ожидаемое значение: 404");
-            System.out.println("Текущее значение:"+ e);
-            Assert.assertFalse(true);
-        }
+        //HttpStatus.CREATED.value()
+
     }
 }
