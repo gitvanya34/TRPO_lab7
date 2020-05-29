@@ -22,6 +22,21 @@ public class Account {
     private String phone;
 
 
+    public Account(String firstName, String lastName, String email, String password, String dayBirth, String monthBirth, String yearBirth, String address, String city, String state, String postCode, String country, String phone) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.dayBirth = dayBirth;
+        this.monthBirth = monthBirth;
+        this.yearBirth = yearBirth;
+        this.address = address;
+        this.city = city;
+        this.state = state;
+        this.postCode = postCode;
+        this.country = country;
+        this.phone = phone;
+    }
 
     public Account() {
         this.firstName ="Иван" ;

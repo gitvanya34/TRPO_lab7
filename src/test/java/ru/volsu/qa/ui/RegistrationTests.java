@@ -37,6 +37,7 @@ public class RegistrationTests extends BaseTest {
         AccountCreationForm accountCreationForm = new AccountCreationForm(webdriver);
         accountCreationForm.fillForm(account);
 
-        Assert.assertTrue(webdriver.getTitle().equals("My account - My Store"));
+       Assert.assertTrue(webdriver.getTitle().equals("My account - My Store"));
+
     }
 }

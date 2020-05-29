@@ -25,8 +25,8 @@ public class BaseTest {
         webdriver.get("http://automationpractice.com/");
     }
 
-//    @AfterMethod
-//    public void closeBrowser(){
-//        webdriver.quit();
-//    }
+    @AfterMethod
+    public void closeBrowser(){
+        webdriver.quit();
+    }
 }

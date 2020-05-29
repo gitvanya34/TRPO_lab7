@@ -2,56 +2,74 @@ package ru.volsu.qa.ui.pageobject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import ru.volsu.qa.models.Account;
 
 public class AccountCreationForm extends BasePage {
 
+
     private By formContainer = By.id("account-creation_form");
 
-    private By genderManInput = By.id("id_gender1");
+    @FindBy( id = "id_gender1" )
+    private WebElement genderManInput;
 
-    private By genderWomenInput = By.id("id_gender2");
+    @FindBy( id = "id_gender2" )
+    private WebElement genderWomanInput;
 
-    private By customfirstNameInput = By.id("customer_firstname");
+    @FindBy( id = "customer_firstname" )
+    private WebElement customfirstNameInput;
 
-    private By customlastNameInput = By.id("customer_lastname");
+    @FindBy( id = "customer_lastname" )
+    private WebElement customlastNameInput;
 
-    //private By emailAddressInput = By.id("email_create");
+    @FindBy( id = "passwd" )
+    private WebElement passwordInput;
 
-    private By passwordInput = By.id("passwd");
+    @FindBy( id = "days" )
+    private WebElement daysSelect;
 
-    private By daysSelect = (By.id("days"));
+    @FindBy( id = "months" )
+    private WebElement monthsSelect ;
 
-    private By monthsSelect = By.id("months");
+    @FindBy( id = "years" )
+    private WebElement yearsSelect;
 
-    private By yearsSelect = By.id("years");
-
-    private By firstNameInput = By.id("firstname");
-
-    private By lastNameInput = By.id("lastname");
 
    // private By companyInput = By.id("company");
    // private By address2Input = By.id("address2");
 
-    private By address1Input = By.id("address1");
+    @FindBy( id = "address1" )
+    private WebElement address1Input ;
 
-    private By cityInput = By.id("city");
+    @FindBy( id = "city" )
+    private WebElement cityInput;
 
-    private By stateSelect = By.id("id_state");
+    @FindBy( id = "id_state" )
+    private WebElement stateSelect;
 
-    private By postCodeInput = By.id("postcode");
+    @FindBy( id = "postcode" )
+    private WebElement postCodeInput ;
 
-    private By countrySelect = By.id("id_country");
+    @FindBy( id = "id_country" )
+    private WebElement countrySelect ;
 
-    private By phoneMobileInput = By.id("phone_mobile");
+    @FindBy( id = "phone_mobile" )
+    private WebElement phoneMobileInput;
 
-    private By registerButton = By.id("submitAccount");
+    @FindBy( id = "submitAccount" )
+    private WebElement registerButton;
 
 
+    private By errorMessage = By.cssSelector(".alert.alert-danger");
 
 
-
+    public String getErrorMessage() {
+        this.waitForElementDisplayed( errorMessage );
+        return webDriver.findElement( errorMessage ).getText();
+    }
 
     public AccountCreationForm(WebDriver webDriver) {
         super( webDriver );
@@ -64,32 +82,36 @@ public class AccountCreationForm extends BasePage {
 
     public void fillForm(Account account) {
        this.waitForElementDisplayed( formContainer );
-       webDriver.findElement( genderManInput ).click();
-       webDriver.findElement( customfirstNameInput ).sendKeys( account.getFirstName() );
-       webDriver.findElement( customlastNameInput ).sendKeys( account.getLastName() );
-       webDriver.findElement( passwordInput ).sendKeys( account.getPassword() );
 
-        Select select = new Select(webDriver.findElement(daysSelect));
+        PageFactory.initElements(webDriver, this);
+
+        genderManInput.click();
+
+        customfirstNameInput.sendKeys( account.getFirstName());
+
+        // webDriver.findElement( customfirstNameInput ).sendKeys( account.getFirstName() );
+
+       customlastNameInput.sendKeys( account.getLastName() );
+       passwordInput.sendKeys( account.getPassword() );
+
+        Select select = new Select(daysSelect);
         select.selectByValue(account.getDayBirth());
 
-        select = new Select(webDriver.findElement(monthsSelect));
+        select = new Select(monthsSelect);
         select.selectByValue(account.getMonthBirth());
 
-        select = new Select(webDriver.findElement(yearsSelect));
+        select = new Select(yearsSelect);
         select.selectByValue(account.getYearBirth());
 
-      //  webDriver.findElement( firstNameInput ).sendKeys( account.getFirstName() );
-      //  webDriver.findElement( lastNameInput ).sendKeys( account.getLastName() );
-        webDriver.findElement( address1Input ).sendKeys( account.getAddress() );
-        webDriver.findElement( cityInput ).sendKeys( account.getCity() );
+        address1Input.sendKeys( account.getAddress() );
+        cityInput.sendKeys( account.getCity() );
 
-        select = new Select(webDriver.findElement(stateSelect));
+        select = new Select(stateSelect);
         select.selectByVisibleText(account.getState());
 
-        webDriver.findElement( postCodeInput ).sendKeys( account.getPostalCode() );
-        webDriver.findElement( phoneMobileInput ).sendKeys( account.getPhone() );
-
-       webDriver.findElement( registerButton ).click();
+        postCodeInput.sendKeys( account.getPostalCode() );
+        phoneMobileInput.sendKeys( account.getPhone() );
+        registerButton.click();
 
     }
 }

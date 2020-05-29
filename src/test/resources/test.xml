@@ -6,12 +6,16 @@
         <parameter name="secondVal" value="1"/>
         <parameter name="expectedVal" value="2"/>
         <classes>
-            <class name="ru.volsu.qa.SimpleTests">
+            <class name="ru.volsu.qa.ui.RegistrationNegativeTests">
                <methods>
                    <include name="testWithParams"/>
                </methods>
             </class>
-
+            <class name="ru.volsu.qa.ui.RegistrationTests">
+                <methods>
+                    <include name="testWithParams"/>
+                </methods>
+            </class>
         </classes>
     </test>
 
