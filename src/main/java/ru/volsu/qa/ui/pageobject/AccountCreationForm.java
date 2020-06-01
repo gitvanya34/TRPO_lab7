@@ -1,12 +1,17 @@
 package ru.volsu.qa.ui.pageobject;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import io.qameta.allure.*;
+import io.qameta.allure.Attachment;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
-import ru.volsu.qa.models.Account;
+import ru.volsu.qa.ui.pageobject.models.Account;
+
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
 
 public class AccountCreationForm extends BasePage {
 
@@ -79,8 +84,8 @@ public class AccountCreationForm extends BasePage {
         this.waitForElementDisplayed(formContainer);
         return true;
     }
-
-    public void fillForm(Account account) {
+@Step("Заполнение формы")
+    public void fillForm(Account account)  {
        this.waitForElementDisplayed( formContainer );
 
         PageFactory.initElements(webDriver, this);
@@ -113,5 +118,9 @@ public class AccountCreationForm extends BasePage {
         phoneMobileInput.sendKeys( account.getPhone() );
         registerButton.click();
 
+
     }
+
+
+
 }

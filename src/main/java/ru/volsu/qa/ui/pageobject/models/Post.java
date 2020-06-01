@@ -1,4 +1,4 @@
-package ru.volsu.qa.models;
+package ru.volsu.qa.ui.pageobject.models;
 
 public class Post {
     Integer id;

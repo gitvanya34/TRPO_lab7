@@ -1,5 +1,8 @@
 package ru.volsu.qa.ui;
 
+import io.qameta.allure.Allure;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -9,6 +12,10 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 
 public class BaseTest {
 
@@ -25,8 +32,15 @@ public class BaseTest {
         webdriver.get("http://automationpractice.com/");
     }
 
+
+    // @Attachment
+    public void screenshot() {
+        Allure.addAttachment("JXRj.png", new ByteArrayInputStream(((TakesScreenshot) webdriver).getScreenshotAs(OutputType.BYTES)));
+    }
     @AfterMethod
     public void closeBrowser(){
+       screenshot();
         webdriver.quit();
     }
+
 }
