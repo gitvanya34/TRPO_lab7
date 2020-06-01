@@ -1,0 +1,108 @@
+{
+  "uid" : "31a9124e2c9cdb2b",
+  "name" : "registerAccount",
+  "fullName" : "ru.volsu.qa.ui.RegistrationTests.registerAccount",
+  "historyId" : "4931e41aec17a6a3c779343a3f7ed881",
+  "time" : {
+    "start" : 1591047576618,
+    "stop" : 1591047584981,
+    "duration" : 8363
+  },
+  "description" : "Verify user registration correct value.",
+  "descriptionHtml" : "<p>Verify user registration correct value.</p>\n",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ {
+    "name" : "initBrowser",
+    "time" : {
+      "start" : 1591047564318,
+      "stop" : 1591047576609,
+      "duration" : 12291
+    },
+    "description" : "",
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  } ],
+  "afterStages" : [ {
+    "name" : "closeBrowser",
+    "time" : {
+      "start" : 1591047584984,
+      "stop" : 1591047586942,
+      "duration" : 1958
+    },
+    "description" : "",
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ {
+      "uid" : "4626c5fac67ce433",
+      "name" : "JXRj.png",
+      "source" : "4626c5fac67ce433.png",
+      "type" : "image/png",
+      "size" : 85378
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : true,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 1
+  } ],
+  "labels" : [ {
+    "name" : "package",
+    "value" : "ru.volsu.qa.ui.RegistrationTests"
+  }, {
+    "name" : "testClass",
+    "value" : "ru.volsu.qa.ui.RegistrationTests"
+  }, {
+    "name" : "testMethod",
+    "value" : "registerAccount"
+  }, {
+    "name" : "parentSuite",
+    "value" : "Default Suite"
+  }, {
+    "name" : "suite",
+    "value" : "lab6.1 — копия"
+  }, {
+    "name" : "subSuite",
+    "value" : "ru.volsu.qa.ui.RegistrationTests"
+  }, {
+    "name" : "host",
+    "value" : "DESKTOP-46KMM98"
+  }, {
+    "name" : "thread",
+    "value" : "16176@DESKTOP-46KMM98.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "testng"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "severity",
+    "value" : "normal"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "arg0",
+    "value" : "Account(firstName=Иван, lastName=Иванов, email=16cp31ksw7@test.com, password=QWERTY!@#$, dayBirth=1, monthBirth=1, yearBirth=1999, address=selo, city=Albuquerque, state=New Mexico, postCode=87001, country=United States, phone=12345678910)"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "31a9124e2c9cdb2b.json",
+  "parameterValues" : [ "Account(firstName=Иван, lastName=Иванов, email=16cp31ksw7@test.com, password=QWERTY!@#$, dayBirth=1, monthBirth=1, yearBirth=1999, address=selo, city=Albuquerque, state=New Mexico, postCode=87001, country=United States, phone=12345678910)" ]
+}
