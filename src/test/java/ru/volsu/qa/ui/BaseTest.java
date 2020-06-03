@@ -1,46 +1,45 @@
 package ru.volsu.qa.ui;
 
 import io.qameta.allure.Allure;
+import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.testng.annotations.*;
+import ru.volsu.qa.ui.config.Config;
+import ru.volsu.qa.ui.pageobject.BasePage;
+import ru.volsu.qa.ui.pageobject.TopBar;
+import ru.volsu.qa.ui.pageobject.AccountCreationForm;
+import ru.volsu.qa.ui.pageobject.SignUpForm;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 
-public class BaseTest {
+@Component
+public class BaseTest extends BasePage{
 
-    protected FirefoxDriver webdriver;
+    @Autowired
+    protected TopBar topBar;
+    @Autowired
+    protected SignUpForm signUpForm;
+    @Autowired
+    protected BasePage basePage;
+    @Autowired
+    protected AccountCreationForm accountCreationForm;
 
     @BeforeMethod
-    public void initBrowser() {
-        String path = System.getProperty("user.dir");
-        System.setProperty("webdriver.gecko.driver", path + "/geckodriver.exe");
-        FirefoxOptions options = new FirefoxOptions();
-        options.addArguments("--start-maximized");
-         webdriver = new FirefoxDriver(options);
-
-        webdriver.get("http://automationpractice.com/");
-    }
+    public void initBrowser()
+        {
+            basePage.openBrowser();
+        }
 
 
-    // @Attachment
-    public void screenshot() {
-        Allure.addAttachment("JXRj.png", new ByteArrayInputStream(((TakesScreenshot) webdriver).getScreenshotAs(OutputType.BYTES)));
-    }
-    @AfterMethod
+    @AfterSuite
     public void closeBrowser(){
-       screenshot();
-        webdriver.quit();
+          basePage.closeBrowser();
     }
 
 }

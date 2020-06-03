@@ -4,7 +4,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.springframework.stereotype.Component;
 
+@Component
 public class SignUpForm extends BasePage {
 
     private By formContainer = By.id("create-account_form");
@@ -15,21 +17,19 @@ public class SignUpForm extends BasePage {
 
     private By errorMessage = By.id("create_account_error");
 
-    public SignUpForm( WebDriver webDriver ) {
-        super( webDriver );
-    }
+
 
     public void fillForm( String email ) {
         this.waitForElementDisplayed( formContainer );
-        webDriver.findElement( emailAddressInput ).sendKeys( email );
+        webdriver.findElement( emailAddressInput ).sendKeys( email );
     }
 
     public void clickCreateAccountButton() {
-        webDriver.findElement( createAccountButton ).click();
+        webdriver.findElement( createAccountButton ).click();
     }
 
     public String getErrorMessage() {
         this.waitForElementDisplayed( errorMessage );
-        return webDriver.findElement( errorMessage ).getText();
+        return webdriver.findElement( errorMessage ).getText();
     }
 }

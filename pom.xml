@@ -12,6 +12,7 @@
         <maven.compiler.target>11</maven.compiler.target>
         <maven.compiler.source>11</maven.compiler.source>
         <allure.version>{latest-allure-version}</allure.version>
+        <org.springframework.version>5.2.0.RELEASE</org.springframework.version>
     </properties>
 
 <dependencies>
@@ -75,7 +76,24 @@
         <version>7.1.0</version>
         <scope>compile</scope>
     </dependency>
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context</artifactId>
+        <version>${org.springframework.version}</version>
+    </dependency>
 
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-test</artifactId>
+        <version>${org.springframework.version}</version>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-test</artifactId>
+        <version>5.2.6.RELEASE</version>
+        <scope>compile</scope>
+    </dependency>
 </dependencies>
     <build>
         <plugins>

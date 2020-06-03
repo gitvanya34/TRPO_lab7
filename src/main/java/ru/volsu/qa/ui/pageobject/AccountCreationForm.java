@@ -7,12 +7,14 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+import org.springframework.stereotype.Component;
+import org.testng.Assert;
 import ru.volsu.qa.ui.pageobject.models.Account;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
-
+@Component
 public class AccountCreationForm extends BasePage {
 
 
@@ -73,22 +75,20 @@ public class AccountCreationForm extends BasePage {
 
     public String getErrorMessage() {
         this.waitForElementDisplayed( errorMessage );
-        return webDriver.findElement( errorMessage ).getText();
+        return webdriver.findElement( errorMessage ).getText();
     }
 
-    public AccountCreationForm(WebDriver webDriver) {
-        super( webDriver );
-    }
+
 
     public boolean isFormDisplayed() {
         this.waitForElementDisplayed(formContainer);
         return true;
     }
-@Step("Заполнение формы")
+
     public void fillForm(Account account)  {
        this.waitForElementDisplayed( formContainer );
 
-        PageFactory.initElements(webDriver, this);
+        PageFactory.initElements(webdriver, this);
 
         genderManInput.click();
 
@@ -114,13 +114,17 @@ public class AccountCreationForm extends BasePage {
         select = new Select(stateSelect);
         select.selectByVisibleText(account.getState());
 
-        postCodeInput.sendKeys( account.getPostalCode() );
+        postCodeInput.sendKeys( account.getPostCode() );
         phoneMobileInput.sendKeys( account.getPhone() );
         registerButton.click();
 
 
-    }
 
+    }
+    public String Title()
+    {
+        return webdriver.getTitle();
+    }
 
 
 }
