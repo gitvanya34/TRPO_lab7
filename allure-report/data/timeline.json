@@ -4,61 +4,61 @@
   "children" : [ {
     "name" : "DESKTOP-46KMM98",
     "children" : [ {
-      "name" : "16176@DESKTOP-46KMM98.main(1)",
+      "name" : "13052@DESKTOP-46KMM98.main(1)",
       "children" : [ {
         "name" : "testAccountCreationFormNegative",
-        "uid" : "221a3f8d9064f358",
-        "parentUid" : "675afeeb089514f185ec944758dc5eb1",
+        "uid" : "abb4722ea0dbcf8",
+        "parentUid" : "ad2dec4dc8679593d7dc53711f0649f3",
         "status" : "passed",
         "time" : {
-          "start" : 1591047552617,
-          "stop" : 1591047562338,
-          "duration" : 9721
+          "start" : 1591219804729,
+          "stop" : 1591219811437,
+          "duration" : 6708
         },
         "flaky" : false,
         "newFailed" : false,
-        "parameters" : [ "Account(firstName=Иван, lastName=Иванов, email=ms131i5ez0@test.com, password=QWERTY!@#$, dayBirth=1, monthBirth=1, yearBirth=1999, address=, city=Albuquerque, state=New Mexico, postCode=87001, country=United States, phone=12345678910)", "There is 1 error\naddress1 is required." ]
+        "parameters" : [ "Account(firstName=Иван, lastName=Иванов, email=3ctp9l1k2s@test.com, password=QWERTY!@#$, dayBirth=1, monthBirth=1, yearBirth=1999, address=, city=Albuquerque, state=New Mexico, postCode=87001, country=United States, phone=12345678910)", "There is 1 error\naddress1 is required." ]
       }, {
         "name" : "registerAccountNegativeTest",
-        "uid" : "5e1bf098d4033684",
-        "parentUid" : "675afeeb089514f185ec944758dc5eb1",
+        "uid" : "4f2f6ffbef63487d",
+        "parentUid" : "ad2dec4dc8679593d7dc53711f0649f3",
         "status" : "passed",
         "time" : {
-          "start" : 1591047534975,
-          "stop" : 1591047538386,
-          "duration" : 3411
+          "start" : 1591219796526,
+          "stop" : 1591219800887,
+          "duration" : 4361
         },
         "flaky" : false,
         "newFailed" : false,
         "parameters" : [ "Account(firstName=Иван, lastName=Иванов, email=john.doeyahoo.com, password=QWERTY!@#$, dayBirth=1, monthBirth=1, yearBirth=1999, address=selo, city=Albuquerque, state=New Mexico, postCode=87001, country=United States, phone=12345678910)", "Invalid email address." ]
       }, {
-        "name" : "registerAccount",
-        "uid" : "31a9124e2c9cdb2b",
-        "parentUid" : "675afeeb089514f185ec944758dc5eb1",
-        "status" : "passed",
-        "time" : {
-          "start" : 1591047576618,
-          "stop" : 1591047584981,
-          "duration" : 8363
-        },
-        "flaky" : false,
-        "newFailed" : false,
-        "parameters" : [ "Account(firstName=Иван, lastName=Иванов, email=16cp31ksw7@test.com, password=QWERTY!@#$, dayBirth=1, monthBirth=1, yearBirth=1999, address=selo, city=Albuquerque, state=New Mexico, postCode=87001, country=United States, phone=12345678910)" ]
-      }, {
         "name" : "registerAccountNegativeTest",
-        "uid" : "a7e5dfb17ba363be",
-        "parentUid" : "675afeeb089514f185ec944758dc5eb1",
+        "uid" : "44b9b2f0b72ef9a8",
+        "parentUid" : "ad2dec4dc8679593d7dc53711f0649f3",
         "status" : "passed",
         "time" : {
-          "start" : 1591047515806,
-          "stop" : 1591047521350,
-          "duration" : 5544
+          "start" : 1591219789302,
+          "stop" : 1591219792832,
+          "duration" : 3530
         },
         "flaky" : false,
         "newFailed" : false,
         "parameters" : [ "Account(firstName=Иван, lastName=Иванов, email=john.doe@yahoo.com, password=QWERTY!@#$, dayBirth=1, monthBirth=1, yearBirth=1999, address=selo, city=Albuquerque, state=New Mexico, postCode=87001, country=United States, phone=12345678910)", "An account using this email address has already been registered. Please enter a valid password or request a new one." ]
+      }, {
+        "name" : "registerAccount",
+        "uid" : "4f262c0f037c7f",
+        "parentUid" : "ad2dec4dc8679593d7dc53711f0649f3",
+        "status" : "passed",
+        "time" : {
+          "start" : 1591219813682,
+          "stop" : 1591219822133,
+          "duration" : 8451
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "Account(firstName=Иван, lastName=Иванов, email=kdz55fvrk1@test.com, password=QWERTY!@#$, dayBirth=1, monthBirth=1, yearBirth=1999, address=selo, city=Albuquerque, state=New Mexico, postCode=87001, country=United States, phone=12345678910)" ]
       } ],
-      "uid" : "675afeeb089514f185ec944758dc5eb1"
+      "uid" : "ad2dec4dc8679593d7dc53711f0649f3"
     } ],
     "uid" : "6fc5850c563da89c57c7d35047fc6c07"
   } ]

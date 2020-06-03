@@ -7,60 +7,60 @@
       "name" : "RegistrationNegativeTests",
       "children" : [ {
         "name" : "registerAccountNegativeTest",
-        "uid" : "a7e5dfb17ba363be",
+        "uid" : "44b9b2f0b72ef9a8",
         "parentUid" : "c8a1a3e6bd223cf94fafd284e64f3fc4",
         "status" : "passed",
         "time" : {
-          "start" : 1591047515806,
-          "stop" : 1591047521350,
-          "duration" : 5544
+          "start" : 1591219789302,
+          "stop" : 1591219792832,
+          "duration" : 3530
         },
         "flaky" : false,
         "newFailed" : false,
         "parameters" : [ "Account(firstName=Иван, lastName=Иванов, email=john.doe@yahoo.com, password=QWERTY!@#$, dayBirth=1, monthBirth=1, yearBirth=1999, address=selo, city=Albuquerque, state=New Mexico, postCode=87001, country=United States, phone=12345678910)", "An account using this email address has already been registered. Please enter a valid password or request a new one." ]
       }, {
         "name" : "registerAccountNegativeTest",
-        "uid" : "5e1bf098d4033684",
+        "uid" : "4f2f6ffbef63487d",
         "parentUid" : "c8a1a3e6bd223cf94fafd284e64f3fc4",
         "status" : "passed",
         "time" : {
-          "start" : 1591047534975,
-          "stop" : 1591047538386,
-          "duration" : 3411
+          "start" : 1591219796526,
+          "stop" : 1591219800887,
+          "duration" : 4361
         },
         "flaky" : false,
         "newFailed" : false,
         "parameters" : [ "Account(firstName=Иван, lastName=Иванов, email=john.doeyahoo.com, password=QWERTY!@#$, dayBirth=1, monthBirth=1, yearBirth=1999, address=selo, city=Albuquerque, state=New Mexico, postCode=87001, country=United States, phone=12345678910)", "Invalid email address." ]
       }, {
         "name" : "testAccountCreationFormNegative",
-        "uid" : "221a3f8d9064f358",
+        "uid" : "abb4722ea0dbcf8",
         "parentUid" : "c8a1a3e6bd223cf94fafd284e64f3fc4",
         "status" : "passed",
         "time" : {
-          "start" : 1591047552617,
-          "stop" : 1591047562338,
-          "duration" : 9721
+          "start" : 1591219804729,
+          "stop" : 1591219811437,
+          "duration" : 6708
         },
         "flaky" : false,
         "newFailed" : false,
-        "parameters" : [ "Account(firstName=Иван, lastName=Иванов, email=ms131i5ez0@test.com, password=QWERTY!@#$, dayBirth=1, monthBirth=1, yearBirth=1999, address=, city=Albuquerque, state=New Mexico, postCode=87001, country=United States, phone=12345678910)", "There is 1 error\naddress1 is required." ]
+        "parameters" : [ "Account(firstName=Иван, lastName=Иванов, email=3ctp9l1k2s@test.com, password=QWERTY!@#$, dayBirth=1, monthBirth=1, yearBirth=1999, address=, city=Albuquerque, state=New Mexico, postCode=87001, country=United States, phone=12345678910)", "There is 1 error\naddress1 is required." ]
       } ],
       "uid" : "c8a1a3e6bd223cf94fafd284e64f3fc4"
     }, {
       "name" : "RegistrationTests",
       "children" : [ {
         "name" : "registerAccount",
-        "uid" : "31a9124e2c9cdb2b",
+        "uid" : "4f262c0f037c7f",
         "parentUid" : "dcdd6264659950eb73c2c7aec263f6cd",
         "status" : "passed",
         "time" : {
-          "start" : 1591047576618,
-          "stop" : 1591047584981,
-          "duration" : 8363
+          "start" : 1591219813682,
+          "stop" : 1591219822133,
+          "duration" : 8451
         },
         "flaky" : false,
         "newFailed" : false,
-        "parameters" : [ "Account(firstName=Иван, lastName=Иванов, email=16cp31ksw7@test.com, password=QWERTY!@#$, dayBirth=1, monthBirth=1, yearBirth=1999, address=selo, city=Albuquerque, state=New Mexico, postCode=87001, country=United States, phone=12345678910)" ]
+        "parameters" : [ "Account(firstName=Иван, lastName=Иванов, email=kdz55fvrk1@test.com, password=QWERTY!@#$, dayBirth=1, monthBirth=1, yearBirth=1999, address=selo, city=Albuquerque, state=New Mexico, postCode=87001, country=United States, phone=12345678910)" ]
       } ],
       "uid" : "dcdd6264659950eb73c2c7aec263f6cd"
     } ],
